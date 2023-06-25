@@ -3,6 +3,7 @@ import Header from './header';
 import Footer from './footer';
 
 function Layout({ children, ...props }) {
+  console.log(children, props);
   return (
     <div className="layout">
       <Header className="" {...props} />

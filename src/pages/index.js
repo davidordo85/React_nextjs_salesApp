@@ -3,7 +3,7 @@ import Layout from '@/components/layout/layout';
 import { getProducts, getProductFilters } from './api/items';
 import ProductsList from '@/components/shared/list-items/productList';
 
-function Home() {
+function Home({ ...props }) {
   const [products, setProducts] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
@@ -40,7 +40,7 @@ function Home() {
   };
 
   return (
-    <Layout handleFilterSubmit={handleFilterSubmit}>
+    <Layout handleFilterSubmit={handleFilterSubmit} {...props}>
       <div className="container">
         <div>
           <ProductsList products={products} isLoading={isLoading} />
