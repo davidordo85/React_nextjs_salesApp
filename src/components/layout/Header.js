@@ -2,10 +2,27 @@ import React from 'react';
 // TODO: place your company logo
 import Link from 'next/link';
 import Filter from '../shared/filter/filter';
+import { getCategories } from '../../pages/api/items';
 
 import { Nav, NavDropdown, Navbar, Image } from 'react-bootstrap';
 
-function Header() {
+function Header({ handleFilterSubmit }) {
+  const [tags, setTags] = React.useState([]);
+
+  React.useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await getCategories();
+        const data = response.result; // Ajusta esto según la estructura de la respuesta de tu backend
+        setTags(data);
+      } catch (error) {
+        console.error('Error al obtener las categorías:', error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   return (
     <Navbar
       style={{ backgroundColor: '#00ADB5' }}
@@ -18,7 +35,7 @@ function Header() {
       </Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
-        <Filter />
+        <Filter tags={tags} onSubmit={handleFilterSubmit} />
         <Nav className="mr-auto">
           {/* Agrega aquí tus elementos de categorías */}
         </Nav>
