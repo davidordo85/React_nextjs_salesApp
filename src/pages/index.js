@@ -1,10 +1,11 @@
 import React from 'react';
 import Layout from '@/components/layout/layout';
+import ListItems from '@/components/shared/list-items/listItems';
 
 function Home() {
   return (
     <Layout>
-      <div>This is the Home page</div>
+      <ListItems />
     </Layout>
   );
 }
